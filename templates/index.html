@@ -419,7 +419,33 @@
                             </ul>
                         </div>
 
-                        <a href="https://events-and-appointments-manager.onrender.com/" class="explore-btn text-[#d4c7b0]">Admin Portal</a>
+                        <!-- Zachlite Cares Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-3 items-start">
+                            <a href="https://events-and-appointments-manager.onrender.com/" class="explore-btn text-[#d4c7b0]">Admin Portal</a>
+                            
+                            <!-- Admin CMS with Copy Password -->
+                            <div class="flex items-center gap-2">
+                                <a href="https://events-and-appointments-manager.onrender.com/admin"
+                                   class="explore-btn text-[#d4c7b0] flex items-center gap-2"
+                                   target="_blank" rel="noopener">
+                                    Admin CMS
+                                </a>
+                                <button
+                                    id="copy-password-btn"
+                                    type="button"
+                                    class="text-xs px-3 py-2 rounded bg-[#241a14] border border-[#d4c7b0] text-[#d4c7b0] font-mono tracking-widest hover:bg-[#d4c7b0] hover:text-[#1a120e] transition-all duration-200 cursor-pointer relative"
+                                    aria-label="Copy admin password">
+                                    <span class="flex items-center gap-1">
+                                        <code>YW5ORG67B</code>
+                                        <svg id="copy-icon" class="w-4 h-4 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M7 3a1 1 0 000 2h6V3H7z"/>
+                                            <path fill-rule="evenodd" d="M4 3a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V3zm2 1h8v9H6V4z"/>
+                                        </svg>
+                                    </span>
+                                    <span id="copy-feedback" class="absolute -top-7 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded opacity-0 pointer-events-none transition-opacity duration-200 whitespace-nowrap">✓ Copied!</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="lg:col-span-8 overflow-hidden">
