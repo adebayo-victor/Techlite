@@ -1041,6 +1041,46 @@
             svg.style.animationDelay = `-${Math.random() * 20}s`;
             container.appendChild(svg);
         }
+        //Zachlice care admin CMS
+        const passwordField = document.getElementById('admin-password-field');
+        const toggleBtn = document.getElementById('toggle-password-btn');
+        const copyBtn = document.getElementById('copy-password-btn');
+        const copyIcon = document.getElementById('copy-icon');
+        const copyFeedback = document.getElementById('copy-feedback');
+        const eyeIcon = document.getElementById('eye-icon');
+    
+        // Toggle password visibility
+        if (toggleBtn && passwordField) {
+            toggleBtn.addEventListener('click', function() {
+                const isPassword = passwordField.type === 'password';
+                passwordField.type = isPassword ? 'text' : 'password';
+                eyeIcon.style.opacity = isPassword ? '0.5' : '1';
+            });
+        }
+    
+        // Copy password to clipboard
+        if (copyBtn && passwordField) {
+            copyBtn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                try {
+                    await navigator.clipboard.writeText(passwordField.value);
+                    
+                    // Icon animation
+                    copyIcon.style.transform = 'scale(1.3) rotate(15deg)';
+                    copyIcon.style.color = '#10b981';
+                    copyFeedback.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        copyIcon.style.transform = 'scale(1) rotate(0deg)';
+                        copyIcon.style.color = '';
+                        copyFeedback.style.opacity = '0';
+                    }, 1500);
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                }
+            });
+        }
     </script>
 </body>
 </html>
