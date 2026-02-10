@@ -1,10 +1,1086 @@
-<div class="project-entry">
-    <h2>Zachlite Cares</h2>
-    <p>This is the Zachlite Cares project description.</p>
-    <!-- Other contents of Zachlite Cares -->
-</div>
-<div class="project-entry">
-    <h2>Guided Rose</h2>
-    <p>This is the Guided Rose project description.</p>
-    <!-- Contents of Guided Rose section moved here -->
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@900&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a120e; 
+            color: #FDFBF7; 
+            overflow-x: hidden;
+        }
+
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+
+        .main-hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracking-widest-extra {
+            letter-spacing: 0.5em;
+        }
+
+        /* Floating Background Icons */
+        .bg-icon-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: #FDFBF7;
+            animation: float-around linear infinite;
+        }
+
+        @keyframes float-around {
+            from { transform: translateY(110vh) rotate(0deg); }
+            to { transform: translateY(-20vh) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-card {
+            background-color: #241a14;
+            border: 1px solid rgba(253, 251, 247, 0.1);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .tech-card:hover {
+            background-color: #FDFBF7;
+            color: #1a120e;
+            transform: translateY(-8px);
+            border-color: #FDFBF7;
+        }
+
+        /* Ambient Icon Animations */
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.08); opacity: 0.7; }
+        }
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes float-y {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .animate-pulse-icon { animation: pulse-soft 3s infinite ease-in-out; }
+        .animate-rotate-icon { animation: rotate-slow 12s infinite linear; }
+        .animate-float-icon { animation: float-y 4s infinite ease-in-out; }
+
+        /* Explore Button Styling */
+        .explore-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid currentColor;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .explore-btn:hover {
+            background-color: #1a120e;
+            color: #FDFBF7;
+        }
+
+        /* Carousel Logic */
+        .carousel-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll-x 40s linear infinite;
+            width: max-content;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-x {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .preview-window {
+            width: 350px;
+            height: 250px;
+            background: #1a120e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(253, 251, 247, 0.1);
+            flex-shrink: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .preview-header {
+            height: 28px;
+            background: rgba(253, 251, 247, 0.05);
+            border-bottom: 1px solid rgba(253, 251, 247, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 4px;
+        }
+
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(253, 251, 247, 0.2); }
+
+        .feature-box {
+            background: rgba(253, 251, 247, 0.03);
+            border-left: 2px solid #d4c7b0;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        /* Partner Styling */
+        .partner-card {
+            background: rgba(253, 251, 247, 0.02);
+            border: 1px solid rgba(253, 251, 247, 0.05);
+            transition: all 0.5s ease;
+        }
+        
+        .partner-card:hover {
+            border-color: #d4c7b0;
+            background: rgba(253, 251, 247, 0.04);
+        }
+
+        .partner-img-frame {
+            width: 100%;
+            height: 200px;
+            background: #130d0a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: scale 0.5s ease, opacity 0.5s ease;
+        }
+
+        .partner-card:hover .partner-img-frame img {
+            scale: 1.05;
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="main-hero px-6">
+        <div class="bg-icon-container" id="bg-icons"></div>
+        <div class="hero-content">
+            <div class="mb-4">
+                <span class="text-xl md:text-2xl font-extrabold tracking-widest-extra uppercase text-[#d4c7b0]">
+                    TechLite
+                </span>
+            </div>
+            <div class="max-w-5xl">
+                <h1 class="serif-font text-6xl md:text-9xl leading-[0.9] md:leading-[0.85] tracking-tighter">
+                    We shape the future.
+                </h1>
+            </div>
+        </div>
+        <div class="absolute bottom-12 animate-bounce z-10">
+            <div class="w-[2px] h-16 bg-[#FDFBF7] opacity-60 mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-20">
+            <h2 class="text-sm font-bold tracking-widest uppercase mb-6 text-[#d4c7b0] opacity-80">Our Expertise</h2>
+            <p class="text-2xl md:text-4xl leading-relaxed font-light">
+                Here at <span class="font-semibold text-[#FDFBF7]">TechLite</span>, we provide IT solutions to problems. We apply our technical rigour across a diverse range of industries.
+            </p>
+        </div>
+        <div class="card-grid">
+            <!-- 01 Healthcare -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">01</span>
+                    <svg class="w-8 h-8 animate-pulse-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Healthcare</h3><p class="text-sm opacity-60 group-hover:opacity-90">Systems for patient care and critical data management.</p></div>
+            </div>
+            <!-- 02 Automation -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">02</span>
+                    <svg class="w-8 h-8 animate-rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Automation</h3><p class="text-sm opacity-60 group-hover:opacity-90">Intelligent workflows and digital industrial precision.</p></div>
+            </div>
+            <!-- 03 Energy -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">03</span>
+                    <svg class="w-8 h-8 animate-float-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Energy</h3><p class="text-sm opacity-60 group-hover:opacity-90">Optimizing distribution and sustainable grid stability.</p></div>
+            </div>
+            <!-- 04 Entertainment -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">04</span>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Entertainment</h3><p class="text-sm opacity-60 group-hover:opacity-90">Immersive experiences and interactive media tech.</p></div>
+            </div>
+            <!-- 05 Desktop Publishing -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">05</span>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Desktop Publishing</h3><p class="text-sm opacity-60 group-hover:opacity-90">Precision layout and digital asset production.</p></div>
+            </div>
+            <!-- 06 Fintech -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">06</span>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.406 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.406-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Fintech</h3><p class="text-sm opacity-60 group-hover:opacity-90">Scalable infrastructure for the global economy.</p></div>
+            </div>
+            <!-- 07 Web 3.0 -->
+            <div class="tech-card p-10 flex flex-col justify-between aspect-square group">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:opacity-100">07</span>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-width="1.5"/></svg>
+                </div>
+                <div><h3 class="serif-font text-4xl mb-4">Web 3.0</h3><p class="text-sm opacity-60 group-hover:opacity-90">Decentralized protocols and blockchain interoperability.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Solutions Section -->
+    <section class="py-32 bg-[#130d0a] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-20 text-center">
+                <h2 class="text-sm font-bold tracking-widest uppercase mb-6 text-[#d4c7b0] opacity-80">Our Active Solutions</h2>
+                <h3 class="serif-font text-5xl md:text-7xl">Live Projects.</h3>
+            </div>
+
+            <div class="space-y-40">
+                <!-- Fling -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-4 space-y-8">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <h4 class="serif-font text-5xl">Fling</h4>
+                                <span class="px-3 py-1 text-[10px] font-bold border border-[#d4c7b0] text-[#d4c7b0] tracking-widest uppercase">Event Tech</span>
+                            </div>
+                            <p class="text-lg opacity-60 leading-relaxed">
+                               An all-in-one event management platform that automates website creation, secures ticket sales via Paystack, and uses AI-driven insights to track attendee engagement from purchase to entry.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h5 class="text-xs font-bold uppercase tracking-widest mb-4 text-[#d4c7b0]">Core Capabilities</h5>
+                            <ul class="text-sm space-y-3 opacity-80">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> Event websites</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> High-speed QR validation</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> AI attendee intelligence</li>
+                            </ul>
+                        </div>
+
+                        <a href="https://fling-2a4m.onrender.com" class="explore-btn text-[#d4c7b0]">Explore Fling</a>
+                    </div>
+
+                    <div class="lg:col-span-8 overflow-hidden">
+                        <div class="carousel-track">
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">fling/dashboard</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="assets\img\Screenshot_20251117_215814_Chrome.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">fling/ticket-builder</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="Screenshot_20251117_220331_Chrome.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">fling/analytics</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="Screenshot_20251117_220431_Chrome.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="Screenshot_20251117_220728_Chrome.png"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VLX-tools -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-4 space-y-8 lg:order-2">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <h4 class="serif-font text-5xl">VLX-Tools</h4>
+                                <span class="px-3 py-1 text-[10px] font-bold border border-[#d4c7b0] text-[#d4c7b0] tracking-widest uppercase">AI Suite</span>
+                            </div>
+                            <p class="text-lg opacity-60 leading-relaxed">
+                                AI powered tools for generating office documents from messy data and custom prompts.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h5 class="text-xs font-bold uppercase tracking-widest mb-4 text-[#d4c7b0]">Core Capabilities</h5>
+                            <ul class="text-sm space-y-3 opacity-80">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> Data Cleaning AI</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> PDF/Excel Auto-Gen</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> Natural Language Queries</li>
+                            </ul>
+                        </div>
+
+                        <a href="https://vlx-excel.onrender.com" class="explore-btn text-[#d4c7b0]">Launch Suite</a>
+                    </div>
+
+                    <div class="lg:col-span-8 overflow-hidden lg:order-1">
+                        <div class="carousel-track" style="animation-direction: reverse;">
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">Main page</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="vlx3.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">vlx/export</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="vlx.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">vlx/prompt-ide</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="vlx1.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="vlx2.png"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zachlite Cares -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-4 space-y-8">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <h4 class="serif-font text-5xl leading-none">Zachlite Cares</h4>
+                                <span class="px-3 py-1 text-[10px] font-bold border border-[#d4c7b0] text-[#d4c7b0] tracking-widest uppercase shrink-0">Health Tech</span>
+                            </div>
+                            <p class="text-lg opacity-60 leading-relaxed">
+                                Secure dental clinic admin dashboard for appointments, patients, and bill management.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h5 class="text-xs font-bold uppercase tracking-widest mb-4 text-[#d4c7b0]">Core Capabilities</h5>
+                            <ul class="text-sm space-y-3 opacity-80">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"><img src="zachlice_care.png"></div> Patient Records Management</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> AI services selection aid</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-[#d4c7b0]"></div> Appointment Scheduler</li>
+                            </ul>
+                        </div>
+
+                        <!-- Zachlite Cares Action Buttons -->
+                        <div class="flex flex-col gap-4">
+                            <!-- Main Action Button -->
+                            <a href="https://events-and-appointments-manager.onrender.com/" class="explore-btn text-[#d4c7b0]">Admin Portal</a>
+                            
+                            <!-- Admin CMS Password Section -->
+                            <div class="p-4 rounded bg-[#241a14] border border-[#d4c7b0]/30 hover:border-[#d4c7b0]/60 transition-all duration-300">
+                                <!-- Label -->
+                                <p class="text-xs font-bold uppercase tracking-widest text-[#d4c7b0] mb-3">Admin CMS Access</p>
+                                
+                                <!-- Links + Password Container -->
+                                <div class="space-y-3">
+                                    <!-- CMS Link -->
+                                    <a href="https://events-and-appointments-manager.onrender.com/admin"
+                                       class="explore-btn text-[#d4c7b0] w-full text-center block"
+                                       target="_blank" rel="noopener">
+                                        Open Admin CMS
+                                    </a>
+                                    
+                                    <!-- Password Field -->
+                                    <div class="flex items-center gap-2">
+                                        <div class="flex-1">
+                                            <label class="text-xs text-[#d4c7b0] opacity-70 block mb-1">Password</label>
+                                            <div class="relative">
+                                                <input 
+                                                    type="password"
+                                                    id="admin-password-field"
+                                                    value="YW5ORG67B"
+                                                    readonly
+                                                    class="w-full px-3 py-2 bg-[#1a120e] border border-[#d4c7b0]/40 text-[#d4c7b0] font-mono text-sm rounded focus:outline-none focus:border-[#d4c7b0] transition-all duration-200"
+                                                />
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Copy Button -->
+                                        <div class="flex gap-1 pt-5">
+                                            <button
+                                                id="toggle-password-btn"
+                                                type="button"
+                                                class="px-2 py-2 rounded bg-[#1a120e] border border-[#d4c7b0]/40 text-[#d4c7b0] hover:border-[#d4c7b0] hover:bg-[#d4c7b0] hover:text-[#1a120e] transition-all duration-200 flex items-center gap-1"
+                                                aria-label="Show/Hide password"
+                                                title="Show/Hide">
+                                                <svg id="eye-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                                </svg>
+                                            </button>
+                                            
+                                            <button
+                                                id="copy-password-btn"
+                                                type="button"
+                                                class="px-2 py-2 rounded bg-[#1a120e] border border-[#d4c7b0]/40 text-[#d4c7b0] hover:border-[#d4c7b0] hover:bg-[#d4c7b0] hover:text-[#1a120e] transition-all duration-200 relative flex items-center gap-1"
+                                                aria-label="Copy password">
+                                                <svg id="copy-icon" class="w-4 h-4 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M7 3a1 1 0 000 2h6V3H7z"/>
+                                                    <path fill-rule="evenodd" d="M4 3a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V3zm2 1h8v9H6V4z"/>
+                                                </svg>
+                                                <span id="copy-feedback" class="absolute -top-8 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded opacity-0 pointer-events-none transition-opacity duration-200 whitespace-nowrap font-semibold">✓ Copied!</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="lg:col-span-8 overflow-hidden">
+                        <div class="carousel-track">
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">Intro</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="zachlice_care.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">admin/billing</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="zachlice_care1.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="text-[9px] opacity-30 ml-2">admin/calendar</span></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="zachlice_care2.png"></div>
+                            </div>
+                            <div class="preview-window">
+                                <div class="preview-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                                <div class="flex items-center justify-center h-full opacity-1 italic"><img src="zachlice_care3.png"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-2xl mb-24">
+                <p class="text-xs font-bold tracking-[0.4em] uppercase mb-4 text-[#d4c7b0] italic">
+                    To further achieve our dream of shaping the future
+                </p>
+                <h3 class="serif-font text-6xl md:text-8xl lowercase">We partner with</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div class="partner-card group overflow-hidden">
+                    <div class="partner-img-frame">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" alt="Partner Placeholder" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="serif-font text-3xl mb-4 group-hover:text-[#d4c7b0] transition-colors">Kristo uno compu +</h4>
+                        <p class="text-sm opacity-50 leading-relaxed group-hover:opacity-80 transition-opacity">
+                            Supports partners by supplying, managing, and coordinating essential resources required for efficient operations and successful technology project execution.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="partner-card group overflow-hidden">
+                    <div class="partner-img-frame">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" alt="Partner Placeholder" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="serif-font text-3xl mb-4 group-hover:text-[#d4c7b0] transition-colors">Shokzy logistics</h4>
+                        <p class="text-sm opacity-50 leading-relaxed group-hover:opacity-80 transition-opacity">
+                            Shokzy Logistics oversees logistics, rentals, and operational support, holding a major company stake while ensuring efficient, reliable service delivery.
+                        </p>
+                    </div>
+                </div>
+                <!--Unused partner div-->
+                <!--<div class="partner-card group overflow-hidden">
+                    <div class="partner-img-frame">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800" alt="Partner Placeholder" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="serif-font text-3xl mb-4 group-hover:text-[#d4c7b0] transition-colors">okie</h4>
+                        <p class="text-sm opacity-50 leading-relaxed group-hover:opacity-80 transition-opacity">
+                            Collaborative description of the synergy between TechLite and this partner. Focused on shared values and future-tech implementations.
+                        </p>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+    <section id="team" class="py-28 px-6 bg-transparent">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-3xl mb-12 text-center">
+            <p class="text-xs font-bold tracking-[0.4em] uppercase mb-4 text-[#d4c7b0] italic">Meet the team</p>
+            <h3 class="serif-font text-5xl md:text-6xl lowercase">People behind TechLite</h3>
+            <p class="text-sm opacity-60 mt-4">A small team of product builders, designers, and engineers crafting meaningful software.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Member 1 -->
+            <article class="team-card partner-card p-6 group" aria-labelledby="member-1-name">
+                <div class="w-full h-48 bg-[#130d0a] rounded-lg overflow-hidden partner-img-frame mb-4">
+                <img src="https://via.placeholder.com/600x400?text=Founder" alt="+" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-60"></div>
+                </div>
+                <h4 id="member-1-name" class="font-semibold text-xl serif-font mb-1">Adebayo Victor</h4>
+                <p class="text-xs opacity-60 mb-3 uppercase tracking-widest text-[#d4c7b0]">Lead Software Engineer, Technical Director & CEO.</p>
+                <p class="text-sm opacity-70 mb-4">Oversees software architecture, development strategy, and technical execution across all products.</p>
+                <div class="flex items-center gap-3">
+                <a href="#" aria-label="Ade's LinkedIn" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.75h4v14.5h-4v-14.5zm7.5 0h3.833v2.01h.055c.536-1.015 1.846-2.09 3.8-2.09 4.063 0 4.813 2.676 4.813 6.154v8.426h-4v-7.467c0-1.78-.032-4.074-2.483-4.074-2.485 0-2.865 1.94-2.865 3.95v7.591h-4v-14.5z"/></svg>
+                </a>
+                <a href="#" aria-label="Ade's Twitter" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 5.92c-.64.28-1.33.47-2.05.56.74-.44 1.31-1.15 1.58-1.98-.7.42-1.47.72-2.29.88A4.02 4.02 0 0015.5 4c-2.22 0-4.02 1.8-4.02 4.02 0 .32.04.64.1.94C7.69 9.79 4.07 7.63 1.64 4.42c-.35.6-.55 1.29-.55 2.03 0 1.4.71 2.64 1.8 3.36-.66-.02-1.29-.2-1.84-.5v.05c0 1.96 1.39 3.6 3.24 3.97-.34.09-.7.14-1.07.14-.26 0-.51-.03-.76-.07.51 1.6 2 2.77 3.76 2.8A8.08 8.08 0 010 19.54a11.4 11.4 0 006.17 1.81c7.4 0 11.45-6.13 11.45-11.45 0-.17 0-.34-.01-.51.79-.57 1.47-1.28 2.01-2.09z"/></svg>
+                </a>
+                <a href="#" aria-label="Ade's GitHub" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.292 9.393 7.865 10.913.575.105.785-.25.785-.556 0-.275-.01-1.006-.015-1.976-3.2.696-3.876-1.54-3.876-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.713.08-.699.08-.699 1.156.082 1.764 1.187 1.764 1.187 1.027 1.758 2.695 1.251 3.352.957.104-.744.402-1.251.732-1.54-2.554-.29-5.242-1.277-5.242-5.684 0-1.255.447-2.279 1.178-3.084-.119-.29-.51-1.46.112-3.043 0 0 .96-.308 3.148 1.174a10.92 10.92 0 012.868-.386c.973.004 1.952.132 2.868.386 2.187-1.482 3.146-1.174 3.146-1.174.624 1.584.233 2.754.115 3.043.734.805 1.176 1.83 1.176 3.084 0 4.42-2.693 5.39-5.259 5.673.414.355.783 1.053.783 2.122 0 1.532-.014 2.768-.014 3.146 0 .308.208.667.791.554C20.707 21.393 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
+                </a>
+                </div>
+            </article>
+
+            <!-- Member 2 -->
+            <article class="team-card partner-card p-6 group" aria-labelledby="member-2-name">
+                <div class="w-full h-48 bg-[#130d0a] rounded-lg overflow-hidden partner-img-frame mb-4">
+                <img src="https://via.placeholder.com/600x400?text=CTO" alt="+" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-60"></div>
+                </div>
+                <h4 id="member-2-name" class="font-semibold text-xl serif-font mb-1">Oluyomi Gbolahan</h4>
+                <p class="text-xs opacity-60 mb-3 uppercase tracking-widest text-[#d4c7b0]">Head of Hardware & Systems Engineering</p>
+                <p class="text-sm opacity-70 mb-4">Leads hardware design, deployment, maintenance, and system integrations.</p>
+                <div class="flex items-center gap-3">
+                <a href="#" aria-label="Tunde's LinkedIn" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.75h4v14.5h-4v-14.5zm7.5 0h3.833v2.01h.055c.536-1.015 1.846-2.09 3.8-2.09 4.063 0 4.813 2.676 4.813 6.154v8.426h-4v-7.467c0-1.78-.032-4.074-2.483-4.074-2.485 0-2.865 1.94-2.865 3.95v7.591h-4v-14.5z"/></svg>
+                </a>
+                <a href="#" aria-label="Tunde's GitHub" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.292 9.393 7.865 10.913.575.105.785-.25.785-.556 0-.275-.01-1.006-.015-1.976-3.2.696-3.876-1.54-3.876-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.713.08-.699.08-.699 1.156.082 1.764 1.187 1.764 1.187 1.027 1.758 2.695 1.251 3.352.957.104-.744.402-1.251.732-1.54-2.554-.29-5.242-1.277-5.242-5.684 0-1.255.447-2.279 1.178-3.084-.119-.29-.51-1.46.112-3.043 0 0 .96-.308 3.148 1.174a10.92 10.92 0 012.868-.386c.973.004 1.952.132 2.868.386 2.187-1.482 3.146-1.174 3.146-1.174.624 1.584.233 2.754.115 3.043.734.805 1.176 1.83 1.176 3.084 0 4.42-2.693 5.39-5.259 5.673.414.355.783 1.053.783 2.122 0 1.532-.014 2.768-.014 3.146 0 .308.208.667.791.554C20.707 21.393 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
+                </a>
+                </div>
+            </article>
+
+            <!-- Member 3 -->
+            <article class="team-card partner-card p-6 group" aria-labelledby="member-3-name">
+                <div class="w-full h-48 bg-[#130d0a] rounded-lg overflow-hidden partner-img-frame mb-4">
+                <img src="https://via.placeholder.com/600x400?text=Lead+Dev" alt="+" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-60"></div>
+                </div>
+                <h4 id="member-3-name" class="font-semibold text-xl serif-font mb-1">Popoola Faisal</h4>
+                <p class="text-xs opacity-60 mb-3 uppercase tracking-widest text-[#d4c7b0]">Head of Research & Development (R&D)</p>
+                <p class="text-sm opacity-70 mb-4">Drives innovation, experimentation, product research, and future-focused technical advancements.</p>
+                <div class="flex items-center gap-3">
+                <a href="#" aria-label="Chiamaka's GitHub" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.292 9.393 7.865 10.913.575.105.785-.25.785-.556 0-.275-.01-1.006-.015-1.976-3.2.696-3.876-1.54-3.876-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.713.08-.699.08-.699 1.156.082 1.764 1.187 1.764 1.187 1.027 1.758 2.695 1.251 3.352.957.104-.744.402-1.251.732-1.54-2.554-.29-5.242-1.277-5.242-5.684 0-1.255.447-2.279 1.178-3.084-.119-.29-.51-1.46.112-3.043 0 0 .96-.308 3.148 1.174a10.92 10.92 0 012.868-.386c.973.004 1.952.132 2.868.386 2.187-1.482 3.146-1.174 3.146-1.174.624 1.584.233 2.754.115 3.043.734.805 1.176 1.83 1.176 3.084 0 4.42-2.693 5.39-5.259 5.673.414.355.783 1.053.783 2.122 0 1.532-.014 2.768-.014 3.146 0 .308.208.667.791.554C20.707 21.393 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
+                </a>
+                <a href="#" aria-label="Chiamaka's LinkedIn" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.75h4v14.5h-4v-14.5zm7.5 0h3.833v2.01h.055c.536-1.015 1.846-2.09 3.8-2.09 4.063 0 4.813 2.676 4.813 6.154v8.426h-4v-7.467c0-1.78-.032-4.074-2.483-4.074-2.485 0-2.865 1.94-2.865 3.95v7.591h-4v-14.5z"/></svg>
+                </a>
+                </div>
+            </article>
+
+            <!-- Member 4 -->
+            <article class="team-card partner-card p-6 group" aria-labelledby="member-4-name">
+                <div class="w-full h-48 bg-[#130d0a] rounded-lg overflow-hidden partner-img-frame mb-4">
+                <img src="https://via.placeholder.com/600x400?text=Designer" alt="+" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1a120e] via-transparent to-transparent opacity-60"></div>
+                </div>
+                <h4 id="member-4-name" class="font-semibold text-xl serif-font mb-1">Ijereme Peace</h4>
+                <p class="text-xs opacity-60 mb-3 uppercase tracking-widest text-[#d4c7b0]">Head of Marketing, Publicity & Brand Communications</p>
+                <p class="text-sm opacity-70 mb-4">Manages advertising, public relations, brand visibility, and audience engagement strategies.</p>
+                <div class="flex items-center gap-3">
+                <a href="#" aria-label="Emeka's Dribbble" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12S5.73 23.5 12 23.5 23.5 18.27 23.5 12 18.27.5 12 .5zm6.91 6.1c1.15 1.91 1.29 4.32.41 6.5-1.98-.61-4.2-.96-6.44-.98-.1-.25-.2-.49-.31-.73 2.2-.71 4.09-1.9 6.34-4.02zM12 4.5c2.37 0 4.49.9 6.02 2.37-2.22 1.93-4 3.1-6.07 3.83-.96-2.1-1.84-4.35-2.46-6.2 1.04-.25 2.14-.5 2.51-.01.12.15.33.32.78.01zM6.98 6.8c.63 1.87 1.55 4.12 2.53 6.24-1.77.64-3.62 1.25-5.82 1.86 1.14-2.06 2.93-3.63 3.29-7.17.01-.16.02-.31.01-.93z"/></svg>
+                </a>
+                <a href="#" aria-label="Emeka's LinkedIn" class="text-[#d4c7b0] hover:text-white" rel="noopener">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.75h4v14.5h-4v-14.5zm7.5 0h3.833v2.01h.055c.536-1.015 1.846-2.09 3.8-2.09 4.063 0 4.813 2.676 4.813 6.154v8.426h-4v-7.467c0-1.78-.032-4.074-2.483-4.074-2.485 0-2.865 1.94-2.865 3.95v7.591h-4v-14.5z"/></svg>
+                </a>
+                </div>
+            </article>
+            </div>
+
+            <div class="mt-10 text-center">
+            <a href="#contact" class="explore-btn text-[#d4c7b0]">Work with us</a>
+            </div>
+        </div>
+    </section>
+    <section id="faq" class="py-24 px-6 bg-transparent">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-3xl mb-12 text-center">
+            <p class="text-xs font-bold tracking-[0.4em] uppercase mb-4 text-[#d4c7b0] italic">Questions answered</p>
+            <h3 class="serif-font text-5xl md:text-6xl lowercase">Frequently asked questions</h3>
+            <p class="text-sm opacity-60 mt-4">Answers to common questions about working with TechLite, pricing, support and security.</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+            <!-- Accordion wrapper -->
+            <div id="faq-accordion" class="space-y-4">
+                <!-- Item 1 -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-1"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-1"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">How do I request a demo?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>Schedule a demo through our contact form or email <a href="mailto:hello@techlite.example" class="underline text-[#d4c7b0]">hello@techlite.example</a>. We typically respond within 48 hours and tailor demos to your use case.</p>
+                </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-2"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-2"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">What does onboarding look like?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>We provide a dedicated onboarding plan that includes kickoff, integrations, training sessions, and a 30-day success plan. Time to production depends on the scope—typical engagements range from 2 to 12 weeks.</p>
+                </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-3"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-3"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">How is my data protected?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>We follow best practices: encrypted data at rest and in transit, role-based access controls, and regular backups. For enterprise clients we offer SOC/ISO documentation on request and support private hosting options.</p>
+                </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-4"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-4"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">Do you offer integrations with other tools?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>Yes — common integrations include Stripe, Google Calendar, Slack, and SSO providers (SAML / OIDC). We can build custom integrations for specific enterprise workflows.</p>
+                </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-5"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-5"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">What are typical pricing models?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>We offer subscription plans, usage-based pricing for high-volume services, and enterprise contracts with SLA and priority support. Request a pricing conversation and we’ll tailor a plan to your needs.</p>
+                </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-6"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-6"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">How do I get support?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-6" role="region" aria-labelledby="faq-btn-6" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>Support is available via email and our customer portal. Enterprise customers receive dedicated account support and SLA-backed response times. For urgent issues, mark the request as high priority in the portal.</p>
+                </div>
+                </div>
+
+                <!-- Item 7 (optional) -->
+                <div class="partner-card p-6">
+                <h4 class="flex items-center justify-between">
+                    <button id="faq-btn-7"
+                            aria-expanded="false"
+                            aria-controls="faq-panel-7"
+                            class="text-left w-full flex items-center justify-between gap-4 focus:outline-none"
+                            type="button">
+                    <span class="font-semibold serif-font text-lg">Can I migrate data from an existing system?</span>
+                    <svg class="w-5 h-5 text-[#d4c7b0] transform transition-transform duration-200" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                </h4>
+                <div id="faq-panel-7" role="region" aria-labelledby="faq-btn-7" class="mt-4 text-sm opacity-80 overflow-hidden max-h-0 transition-[max-height] duration-300">
+                    <p>Yes — we handle migrations of records, calendars, and user accounts. We can run test migrations to validate mappings and minimize downtime during cutover.</p>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="mt-8 text-center">
+            <a href="#contact" class="explore-btn text-[#d4c7b0]">Still have questions?</a>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+            const accordion = document.getElementById('faq-accordion');
+            if (!accordion) return;
+
+            // Attach click handlers to all buttons
+            const buttons = accordion.querySelectorAll('button[id^="faq-btn-"]');
+            buttons.forEach(btn => {
+                const panelId = btn.getAttribute('aria-controls');
+                const panel = document.getElementById(panelId);
+
+                // Toggle function
+                const toggle = (closeOthers = true) => {
+                const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+                // Optionally close other panels (single-open accordion). Set to false to allow multiple open.
+                if (closeOthers) {
+                    buttons.forEach(otherBtn => {
+                    if (otherBtn === btn) return;
+                    const otherPanel = document.getElementById(otherBtn.getAttribute('aria-controls'));
+                    otherBtn.setAttribute('aria-expanded', 'false');
+                    otherPanel.style.maxHeight = null;
+                    otherBtn.querySelector('svg')?.classList.remove('rotate-180');
+                    });
+                }
+
+                if (isOpen) {
+                    btn.setAttribute('aria-expanded', 'false');
+                    panel.style.maxHeight = null;
+                    btn.querySelector('svg')?.classList.remove('rotate-180');
+                } else {
+                    btn.setAttribute('aria-expanded', 'true');
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                    btn.querySelector('svg')?.classList.add('rotate-180');
+                }
+                };
+
+                // Click handler
+                btn.addEventListener('click', () => toggle(true));
+
+                // Keyboard support: Enter and Space toggle
+                btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle(true);
+                }
+                });
+
+                // Ensure panels collapse on load
+                panel.style.maxHeight = null;
+            });
+            })();
+        </script>
+    </section>
+    <section id="contact" class="py-24 px-6 bg-[#130d0a] border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+        <p class="text-xs font-bold tracking-[0.4em] uppercase mb-4 text-[#d4c7b0] italic">Get in touch</p>
+        <h3 class="serif-font text-5xl md:text-6xl lowercase">Contact Us</h3>
+        <p class="text-sm opacity-60 mt-4">Tell us about your project, request a demo, or ask a question — we’ll get back within 48 hours.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Contact info -->
+        <div class="lg:col-span-1 partner-card p-6">
+            <h4 class="font-semibold serif-font text-xl mb-2">Reach us</h4>
+            <p class="text-sm opacity-70 mb-4">Prefer email or chat? Send a message and we’ll reply quickly.</p>
+
+            <ul class="text-sm opacity-80 space-y-3">
+            <li><strong class="text-[#d4c7b0]">Email:</strong> <a href="mailto:adebayovictorvicade@gmail.com" class="underline">hello@techlite.example</a></li>
+            <li><strong class="text-[#d4c7b0]">Phone:</strong> <a href="tel:+234 8136390030" class="undine">+234 8136390030</a></li>
+            <li><strong class="text-[#d4c7b0]">WhatsApp:</strong> <a href="https://wa.me/1234567890?text=Hello%20TechLite%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener" class="underline">Chat on WhatsApp</a></li>
+            <li><strong class="text-[#d4c7b0]">Location:</strong> Remote · Abeokuta/Nigeria</li>
+            </ul>
+
+            <div class="mt-6 flex items-center gap-3">
+            <a href="#" aria-label="LinkedIn" class="text-[#d4c7b0] hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.75h4v14.5h-4v-14.5zm7.5 0h3.833v2.01h.055c.536-1.015 1.846-2.09 3.8-2.09 4.063 0 4.813 2.676 4.813 6.154v8.426h-4v-7.467c0-1.78-.032-4.074-2.483-4.074-2.485 0-2.865 1.94-2.865 3.95v7.591h-4v-14.5z"/></svg>
+            </a>
+
+            <a href="#" aria-label="Twitter" class="text-[#d4c7b0] hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 5.92c-.64.28-1.33.47-2.05.56.74-.44 1.31-1.15 1.58-1.98-.7.42-1.47.72-2.29.88A4.02 4.02 0 0015.5 4c-2.22 0-4.02 1.8-4.02 4.02 0 .32.04.64.1.94C7.69 9.79 4.07 7.63 1.64 4.42c-.35.6-.55 1.29-.55 2.03 0 1.4.71 2.64 1.8 3.36-.66-.02-1.29-.2-1.84-.5v.05c0 1.96 1.39 3.6 3.24 3.97-.34.09-.7.14-1.07.14-.26 0-.51-.03-.76-.07.51 1.6 2 2.77 3.76 2.8A8.08 8.08 0 010 19.54a11.4 11.4 0 006.17 1.81c7.4 0 11.45-6.13 11.45-11.45 0-.17 0-.34-.01-.51.79-.57 1.47-1.28 2.01-2.09z"/></svg>
+            </a>
+
+            <a href="https://wa.me/08136390030" aria-label="WhatsApp" target="_blank" rel="noopener" class="text-[#d4c7b0] hover:text-white">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.52 3.48A11.86 11.86 0 0012 0C5.373 0 .01 5.373.01 12 0 13.993.447 15.863 1.297 17.5L0 24l6.698-1.32A11.906 11.906 0 0012 24c6.627 0 12-5.373 12-12 0-3.207-1.237-6.217-3.48-8.52zM12 21.5c-1.04 0-2.06-.21-3-.61l-.22-.09L4.5 20l.89-3.9-.09-.22A9.49 9.49 0 012.5 12C2.5 7.03 6.53 3 12 3s9.5 4.03 9.5 9.5S17.47 21.5 12 21.5zM17.2 14.63c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.62.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.06-.28-.14-1.18-.43-2.25-1.39-.83-.74-1.39-1.66-1.55-1.92-.16-.27-.02-.42.12-.56.12-.12.28-.31.42-.46.14-.15.18-.26.28-.43.09-.18.05-.32-.02-.45-.07-.13-.62-1.49-.85-2.04-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.54-.01s-.45.06-.69.32c-.25.26-.95.93-.95 2.28s.97 2.65 1.1 2.83c.12.18 1.9 2.9 4.6 3.95 1.31.47 1.86.47 2.54.39.41-.05 1.3-.53 1.49-1.04.19-.51.19-.95.13-1.04-.06-.08-.23-.13-.51-.26z"/>
+                </svg>
+            </a>
+
+            <a href="#" aria-label="GitHub" class="text-[#d4c7b0] hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.292 9.393 7.865 10.913.575.105.785-.25.785-.556 0-.275-.01-1.006-.015-1.976-3.2.696-3.876-1.54-3.876-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.713.08-.699.08-.699 1.156.082 1.764 1.187 1.764 1.187 1.027 1.758 2.695 1.251 3.352.957.104-.744.402-1.251.732-1.54-2.554-.29-5.242-1.277-5.242-5.684 0-1.255.447-2.279 1.178-3.084-.119-.29-.51-1.46.112-3.043 0 0 .96-.308 3.148 1.174a10.92 10.92 0 012.868-.386c.973.004 1.952.132 2.868.386 2.187-1.482 3.146-1.174 3.146-1.174.624 1.584.233 2.754.115 3.043.734.805 1.176 1.83 1.176 3.084 0 4.42-2.693 5.39-5.259 5.673.414.355.783 1.053.783 2.122 0 1.532-.014 2.768-.014 3.146 0 .308.208.667.791.554C20.707 21.393 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
+            </a>
+            </div>
+        </div>
+
+        <!-- Form
+        <form id="contact-form" class="lg:col-span-2 partner-card p-6 space-y-4" method="POST" action="#"
+                aria-label="Contact form">
+                | Honeypot for bots |
+            <input type="text" name="company_website" class="hidden" tabindex="-1" autocomplete="off" />
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label class="flex flex-col">
+                <span class="text-xs opacity-60 mb-2">Full name</span>
+                <input id="name" name="name" required type="text" placeholder="Your name"
+                    class="px-4 py-3 rounded-md bg-[#1a120e] border border-white/10 text-[#FDFBF7]"/>
+            </label>
+
+            <label class="flex flex-col">
+                <span class="text-xs opacity-60 mb-2">Email</span>
+                <input id="email" name="email" required type="email" placeholder="you@company.com"
+                    class="px-4 py-3 rounded-md bg-[#1a120e] border border-white/10 text-[#FDFBF7]"/>
+            </label>
+            </div>
+
+            <label class="flex flex-col">
+            <span class="text-xs opacity-60 mb-2">Subject</span>
+            <input id="subject" name="subject" type="text" placeholder="Short subject"
+                    class="px-4 py-3 rounded-md bg-[#1a120e] border border-white/10 text-[#FDFBF7]"/>
+            </label>
+
+            <label class="flex flex-col">
+            <span class="text-xs opacity-60 mb-2">Message</span>
+            <textarea id="message" name="message" required rows="6" placeholder="Tell us about your project..."
+                        class="px-4 py-3 rounded-md bg-[#1a120e] border border-white/10 text-[#FDFBF7]"></textarea>
+            </label>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+            <button type="submit" id="contact-submit" class="explore-btn bg-[#d4c7b0] text-[#1a120e] font-bold px-6 py-3">
+                Send message
+            </button>
+
+            <a href="https://wa.me/1234567890?text=Hello%20TechLite%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener"
+                class="explore-btn text-[#d4c7b0] border-white/10 px-6 py-3" aria-label="Chat on WhatsApp">
+                Chat on WhatsApp
+            </a>
+
+            <div id="contact-status" class="text-sm opacity-80" aria-live="polite"></div>
+            </div>
+
+            <p class="text-xs opacity-60 mt-2">By contacting us you agree to our <a href="#" class="underline text-[#d4c7b0]">privacy policy</a>.</p>
+        </form> -->
+        </div>
+    </div>
+
+    <script>
+        (function () {
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('contact-status');
+
+        // Replace this with your real endpoint (API route, Netlify Forms, Formspree, etc.)
+        const ENDPOINT = ''; // e.g. '/api/contact' or 'https://formspree.io/f/xxxx'
+
+        function showMessage(msg, isError = false) {
+            status.textContent = msg;
+            status.classList.toggle('text-red-400', isError);
+            status.classList.toggle('text-[#d4c7b0]', !isError);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Simple client-side validation
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const message = form.message.value.trim();
+            const honeypot = form.company_website.value;
+
+            if (honeypot) return; // spam bot
+
+            if (!name || !email || !message) {
+            showMessage('Please complete name, email and message fields.', true);
+            return;
+            }
+
+            showMessage('Sending…');
+
+            // If no endpoint provided, just show success (useful for local/dev)
+            if (!ENDPOINT) {
+            setTimeout(() => {
+                showMessage('Message sent — thank you! We will respond within 48 hours.');
+                form.reset();
+            }, 800);
+            return;
+            }
+
+            try {
+            const res = await fetch(ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, subject: form.subject.value, message })
+            });
+
+            if (!res.ok) throw new Error('Network response was not ok');
+
+            showMessage('Message sent — thank you! We will respond within 48 hours.');
+            form.reset();
+            } catch (err) {
+            console.error(err);
+            showMessage('Something went wrong. Please try again or message us on WhatsApp', true);
+            }
+        });
+        })();
+    </script>
+    </section>
+    <!-- Minimalist Footer -->
+    <footer class="py-16 border-t border-white/10 text-center">
+        <p class="text-xs tracking-widest uppercase opacity-30">&copy; 2026 TechLite Studio</p>
+    </footer>
+
+    <script>
+        const iconPaths = [
+            'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z',
+            'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
+            'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+            'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z'
+        ];
+
+        const container = document.getElementById('bg-icons');
+        for (let i = 0; i < 20; i++) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.classList.add('floating-icon');
+            path.setAttribute('d', iconPaths[Math.floor(Math.random() * iconPaths.length)]);
+            svg.appendChild(path);
+            svg.style.width = `${Math.random() * 40 + 20}px`;
+            svg.style.left = `${Math.random() * 100}%`;
+            svg.style.animationDuration = `${Math.random() * 15 + 10}s`;
+            svg.style.animationDelay = `-${Math.random() * 20}s`;
+            container.appendChild(svg);
+        }
+        //Zachlice care admin CMS
+        const passwordField = document.getElementById('admin-password-field');
+        const toggleBtn = document.getElementById('toggle-password-btn');
+        const copyBtn = document.getElementById('copy-password-btn');
+        const copyIcon = document.getElementById('copy-icon');
+        const copyFeedback = document.getElementById('copy-feedback');
+        const eyeIcon = document.getElementById('eye-icon');
+    
+        // Toggle password visibility
+        if (toggleBtn && passwordField) {
+            toggleBtn.addEventListener('click', function() {
+                const isPassword = passwordField.type === 'password';
+                passwordField.type = isPassword ? 'text' : 'password';
+                eyeIcon.style.opacity = isPassword ? '0.5' : '1';
+            });
+        }
+    
+        // Copy password to clipboard
+        if (copyBtn && passwordField) {
+            copyBtn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                try {
+                    await navigator.clipboard.writeText(passwordField.value);
+                    
+                    // Icon animation
+                    copyIcon.style.transform = 'scale(1.3) rotate(15deg)';
+                    copyIcon.style.color = '#10b981';
+                    copyFeedback.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        copyIcon.style.transform = 'scale(1) rotate(0deg)';
+                        copyIcon.style.color = '';
+                        copyFeedback.style.opacity = '0';
+                    }, 1500);
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
